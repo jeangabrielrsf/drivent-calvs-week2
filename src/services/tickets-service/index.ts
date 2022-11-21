@@ -20,7 +20,7 @@ async function findTickets(userId: number): Promise<FindTicketsResult> {
   if (!tickets) {
     throw notFoundError();
   }
-  const ticketType = getTicketTypeById(tickets.ticketTypeId);
+  const ticketType = await getTicketTypeById(tickets.ticketTypeId);
 
   return tickets;
 }
@@ -43,10 +43,12 @@ async function getTicketTypeById(ticketTypeId: number): Promise<GetTicketTypesRe
   if (!ticketType) throw notFoundError();
   return ticketType;
 }
+
 const ticketsService = {
   insertTicket,
   findTicketsTypes,
   findTickets,
+  getTicketTypeById,
 };
 
 export default ticketsService;
